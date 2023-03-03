@@ -5,15 +5,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
-
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Leaderboard {
-
-    List<Member> members;
-    int count;
-    int total_count;
+public class RoleReward {
+    long roleId;
+    long level;
 }
