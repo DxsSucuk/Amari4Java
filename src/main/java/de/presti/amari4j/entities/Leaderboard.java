@@ -15,5 +15,5 @@ public class Leaderboard {
 
     List<Member> members;
     int count;
-    int total_count;
+    int totalCount;
 }

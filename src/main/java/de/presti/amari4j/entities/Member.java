@@ -14,6 +14,6 @@ public class Member {
     String userid;
     String username;
     long experience;
-    long weekly_experience;
+    long weeklyExperience;
     long level;
 }
