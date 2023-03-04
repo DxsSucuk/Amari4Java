@@ -4,4 +4,4 @@
 
 ## Guide
 
-* [Setup](guide/setup.md)
+* [Getting started!](guide/getting-started.md)
