@@ -18,20 +18,49 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Wrapper class containing all functions.
+ */
 @NoArgsConstructor
 @AllArgsConstructor
 public class Amari4J {
 
+    /**
+     * The API-Key that is being used.
+     */
     @Setter
     private String apiKey;
 
+    /**
+     * The base url to the API.
+     */
     private static final String BASE_URL = "https://amaribot.com/api/v1";
+
+    /**
+     * The used HttpClient for the requests.
+     */
     private static final OkHttpClient okHttpClient = new OkHttpClient.Builder().build();
 
+    /**
+     * Retrieve the Leaderboard of the specified Guild.
+     * @param guildId the ID of the Guild.
+     * @return an instance of the {@link Leaderboard} class containing the information.
+     * @throws RateLimitException If you the rate-limit has been hit.
+     * @throws InvalidAPIKeyException If the set API-Key is invalid.
+     */
     public Leaderboard getLeaderboard(String guildId) throws RateLimitException, InvalidAPIKeyException {
         return getLeaderboard(guildId, 1, 50);
     }
 
+    /**
+     * Retrieve the Leaderboard of the specified Guild.
+     * @param guildId the ID of the Guild.
+     * @param page the page of the leaderboard.
+     * @param limit how many entries per page.
+     * @return an instance of the {@link Leaderboard} class containing the information.
+     * @throws RateLimitException If you the rate-limit has been hit.
+     * @throws InvalidAPIKeyException If the set API-Key is invalid.
+     */
     public Leaderboard getLeaderboard(String guildId, int page, int limit) throws RateLimitException, InvalidAPIKeyException {
         JsonElement jsonElement = send("/guild/leaderboard/" + guildId + "?page=" + page + "&limit=" + limit);
         if (jsonElement.isJsonObject()) {
@@ -41,6 +70,14 @@ public class Amari4J {
         return null;
     }
 
+    /**
+     * Retrieve the Raw Leaderboard of the specified Guild.
+     * @param guildId the ID of the Guild.
+     * @param limit how many entries should be returned.
+     * @return an instance of the {@link Leaderboard} class containing the information.
+     * @throws RateLimitException If you the rate-limit has been hit.
+     * @throws InvalidAPIKeyException If the set API-Key is invalid.
+     */
     public Leaderboard getRawLeaderboard(String guildId, int limit) throws RateLimitException, InvalidAPIKeyException {
         JsonElement jsonElement = send("/guild/raw/leaderboard/" + guildId + "?limit=" + limit);
         if (jsonElement.isJsonObject()) {
@@ -50,10 +87,26 @@ public class Amari4J {
         return null;
     }
 
+    /**
+     * Retrieve the Weekly Leaderboard of the specified Guild.
+     * @param guildId the ID of the Guild.
+     * @return an instance of the {@link Leaderboard} class containing the information.
+     * @throws RateLimitException If you the rate-limit has been hit.
+     * @throws InvalidAPIKeyException If the set API-Key is invalid.
+     */
     public Leaderboard getWeeklyLeaderboard(String guildId) throws RateLimitException, InvalidAPIKeyException {
         return getWeeklyLeaderboard(guildId, 1, 50);
     }
 
+    /**
+     * Retrieve the Weekly Leaderboard of the specified Guild.
+     * @param guildId the ID of the Guild.
+     * @param page the page of the leaderboard.
+     * @param limit how many entries per page.
+     * @return an instance of the {@link Leaderboard} class containing the information.
+     * @throws RateLimitException If you the rate-limit has been hit.
+     * @throws InvalidAPIKeyException If the set API-Key is invalid.
+     */
     public Leaderboard getWeeklyLeaderboard(String guildId, int page, int limit) throws RateLimitException, InvalidAPIKeyException {
         JsonElement jsonElement = send("/guild/weekly/" + guildId + "?page=" + page + "&limit=" + limit);
         if (jsonElement.isJsonObject()) {
@@ -63,6 +116,14 @@ public class Amari4J {
         return null;
     }
 
+    /**
+     * Retrieve the Raw Weekly Leaderboard of the specified Guild.
+     * @param guildId the ID of the Guild.
+     * @param limit how many entries should be returned.
+     * @return an instance of the {@link Leaderboard} class containing the information.
+     * @throws RateLimitException If you the rate-limit has been hit.
+     * @throws InvalidAPIKeyException If the set API-Key is invalid.
+     */
     public Leaderboard getRawWeeklyLeaderboard(String guildId, int limit) throws RateLimitException, InvalidAPIKeyException {
         JsonElement jsonElement = send("/guild/raw/weekly/" + guildId + "?limit=" + limit);
         if (jsonElement.isJsonObject()) {
@@ -72,10 +133,26 @@ public class Amari4J {
         return null;
     }
 
+    /**
+     * Retrieve get Rewards of the specified Guild.
+     * @param guildId the ID of the Guild.
+     * @return an instance of {@link Rewards} containing all rewards.
+     * @throws RateLimitException If you the rate-limit has been hit.
+     * @throws InvalidAPIKeyException If the set API-Key is invalid.
+     */
     public Rewards getRewards(String guildId) throws RateLimitException, InvalidAPIKeyException {
         return getRewards(guildId, 1, 50);
     }
 
+    /**
+     * Retrieve get Rewards of the specified Guild.
+     * @param guildId the ID of the Guild.
+     * @param page the page of the rewards.
+     * @param limit how many entries per page.
+     * @return an instance of {@link Rewards} containing all rewards.
+     * @throws RateLimitException If you the rate-limit has been hit.
+     * @throws InvalidAPIKeyException If the set API-Key is invalid.
+     */
     public Rewards getRewards(String guildId, int page, int limit) throws RateLimitException, InvalidAPIKeyException {
         JsonElement jsonElement = send("/guild/rewards/" + guildId + "?page=" + page + "&limit=" + limit);
         if (jsonElement.isJsonObject()) {
@@ -105,6 +182,14 @@ public class Amari4J {
         return null;
     }
 
+    /**
+     * Get information about a specific member of a guild.
+     * @param guildId the ID of the Guild.
+     * @param userId the ID of the User.
+     * @return an instance of {@link Member} containing all information about that member.
+     * @throws RateLimitException If you the rate-limit has been hit.
+     * @throws InvalidAPIKeyException If the set API-Key is invalid.
+     */
     public Member getMember(String guildId, String userId) throws RateLimitException, InvalidAPIKeyException {
         JsonElement jsonElement = send("/guild/" + guildId + "/member/" + userId);
         if (jsonElement.isJsonObject()) {
@@ -114,6 +199,13 @@ public class Amari4J {
         return null;
     }
 
+    /**
+     * Get information about all members of a guild.
+     * @param guildId the ID of the Guild.
+     * @return an instance of a {@link List} containing information about all {@link Member}s
+     * @throws RateLimitException If you the rate-limit has been hit.
+     * @throws InvalidAPIKeyException If the set API-Key is invalid.
+     */
     public List<Member> getMembers(String guildId) throws RateLimitException, InvalidAPIKeyException {
         JsonElement jsonElement = send("/guild/" + guildId + "/members");
 
@@ -135,6 +227,13 @@ public class Amari4J {
         return null;
     }
 
+    /**
+     * Handles the sending and json parsing.
+     * @param path the API path
+     * @return returns the parsed {@link JsonElement}
+     * @throws RateLimitException If you the rate-limit has been hit.
+     * @throws InvalidAPIKeyException If the set API-Key is invalid.
+     */
     private JsonElement send(String path) throws RateLimitException, InvalidAPIKeyException {
         Request request = new Request.Builder()
                 .addHeader("Authorization", apiKey)
@@ -174,6 +273,11 @@ public class Amari4J {
         }
     }
 
+    /**
+     * Parses a {@link Leaderboard} out of a {@link JsonObject}
+     * @param jsonObject the {@link JsonObject} containing all the leaderboard information.
+     * @return a parsed {@link Leaderboard}
+     */
     private Leaderboard parseLeaderboard(JsonObject jsonObject) {
 
         Leaderboard leaderboard = new Leaderboard();
@@ -203,6 +307,11 @@ public class Amari4J {
         return leaderboard;
     }
 
+    /**
+     * Parses a {@link Member} out of a {@link JsonObject}
+     * @param memberObject the {@link JsonObject} containing all the member information.
+     * @return a parsed {@link Member}
+     */
     private Member parseMember(JsonObject memberObject) {
         Member member = new Member();
 
@@ -229,6 +338,11 @@ public class Amari4J {
         return member;
     }
 
+    /**
+     * Parses a {@link RoleReward} out of a {@link JsonObject}
+     * @param roleObject the {@link JsonObject} containing all the role reward information.
+     * @return a parsed {@link RoleReward}
+     */
     private RoleReward parseRoleReward(JsonObject roleObject) {
         RoleReward roleReward = new RoleReward();
 
