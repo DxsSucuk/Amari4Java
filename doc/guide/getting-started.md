@@ -4,7 +4,7 @@
 
 Before starting you will need a API-Key from [Amari](https://docs.amaribot.com/api/api#authentication).
 
-## How do Import this Library?
+## How do I Import this Library?
 
 You can use [Jitpack](https://jitpack.io/#DxsSucuk/Amari4Java) to import it into your Project!
 
